@@ -1,0 +1,384 @@
+@startuml ENTIDAD111
+skinparam linetype ortho
+
+' =====================
+' ENTIDADES
+' =====================
+
+entity usuario {
+  +id : INT <<PK>>
+  --
+  correoInst : VARCHAR(35) <<UQ>>
+  password : VARCHAR(255)
+  rol : VARCHAR(20)
+  nombre : VARCHAR(50)
+  apellido_paterno : VARCHAR(50)
+  apellido_materno : VARCHAR(50)
+
+  intentos_fallidos : TINY INT UNSIGNED
+  cuenta_bloqueada : TINY INT(1) UNSIGNED
+  fecha_bloqueo : DATETIME
+
+
+
+  fecha_creacion : DATETIME
+
+
+  rubrica_imagen
+  rubrica_hash
+  rubrica_ip
+  rubrica_fecha_registro
+}
+
+entity alumno {
+  +id : INT <<PK>>
+  --
+  usuario_id : INT UNIQUE <<FK>>
+}
+
+entity profesor{
+  +id : INT <<PK>>
+  --
+  usuario_id : INT UNIQUE <<FK>>
+  
+  id_creado_Por; 
+}
+
+entity coordinador {
+  +id : INT <<PK>>
+  --
+  usuario_id : INT UNIQUE <<FK>>
+  
+  id_creado_Por; 
+}
+
+entity token_contraseña{
+  +id : INT <<PK>>
+  --
+  id_usuario : INT UNSIGNED <<FK>>
+  token : VARCHAR(255)
+  fecha_expiracion : DATETIME
+  usado: TINY INT(1)
+}
+
+entity oferta_servicio{
+  +id : INT <<PK>>
+  --
+  profesor_id : INT <<FK>>
+  coordinador_id : INT <<FK>>
+}
+
+entity solicitud_registro {
+  +id : INT <<PK>>
+  --
+  alumno_id : INT UNIQUE <<FK>>
+  oferta_id : INT <<FK>>
+  periodo_registro_id : INT <<FK>>
+  carrera_id : INT <<FK>>
+}
+
+
+entity actividad {
+  +id : INT <<PK>>
+  --
+  solicitud_registro_id : INT <<FK>>
+}
+
+entity bitacora {
+  +id : INT <<PK>>
+  --
+  solicitud_registro_id : INT <<FK>>
+}
+
+entity registro_bitacora_actividades {
+  +id : INT <<PK>>
+  --
+  bitacora_id : INT <<FK>>
+  actividad_id : INT <<FK>>
+  --
+  <<UNIQUE>> (bitacora_id, actividad_id)
+}
+
+entity reporte_mensual{
+  +id : INT <<PK>>
+  --
+  solicitud_registro_id : INT <<FK>>
+  documento_id : INT UNIQUE <<FK>>
+}
+
+entity reporte_global{
+  +id : INT <<PK>>
+  --
+  solicitud_registro_id : INT <<FK>>
+  documento_id : INT UNIQUE <<FK>>
+}
+
+
+
+entity revision_reporte_mensual {
+  +id : INT <<PK>>
+  --
+  reporte_mensual_id : INT <<FK>>
+  usuario_id : INT <<FK>>
+  tipo_revisor (alumno / profesor / coordinador)
+  estado (aprobado / rechazado)
+  comentario (si rechazado)
+  hash_documento (si aprobado)
+  hash_rubrica (si aprobado)
+  ip_firma (si aprobado)
+  token_tsa (si aprobado)
+  fecha
+}
+
+entity revision_reporte_global {
+  +id : INT <<PK>>
+  --
+  reporte_global_id : INT <<FK>>
+  usuario_id : INT <<FK>>
+  tipo_revisor (alumno / profesor / coordinador)
+  estado (aprobado / rechazado)
+  comentario (si rechazado)
+  hash_documento (si aprobado)
+  hash_rubrica (si aprobado)
+  ip_firma (si aprobado)
+  token_tsa (si aprobado)
+  fecha
+}
+
+entity documento {
+  +id : INT <<PK>>
+  --
+  alumno_id : INT <<FK>>
+  creador_id : INT <<FK>>
+}
+
+entity cumulo_horas_y_faltas {
+  +id : INT <<PK>>
+  --
+  alumno_id : INT UNIQUE <<FK>>
+}
+
+' carrera DESEADO
+entity carrera {
+  +id : INT <<PK>>
+  --
+  nombre : VARCHAR
+}
+
+entity deseo_de_carrera {
+  + id : INT <<PK>>
+  --
+  oferta_id : INT <<FK>>
+  carrera_id : INT <<FK>>
+  --
+  <<UNIQUE>> (oferta_id, carrera_id)
+}
+
+' profesorCARACTERISTICA
+
+entity caracteristica {
+  +id : INT <<PK>>
+  --
+}
+
+entity solicitud_caracteristica {
+  +id : INT <<PK>>
+  --
+  profesor_id : INT <<FK>>
+  caracteristica_id : INT <<FK>>
+}
+
+' CALENDARIO
+
+entity evento_calendario {
+  +id : INT <<PK>>
+  --
+  coordinador_id : INT <<FK>>
+  nombre: VARCHAR
+  tipo: ENUM("Vacacional", "Inhabil")
+  fecha: DATE
+  hora: TIME
+  fecha_inicio: DATE
+  fecha_fin: DATE
+}
+' RECURSO
+entity recurso {
+  +id : INT <<PK>>
+  --
+  coordinador_id : INT <<FK>>
+}
+
+
+entity periodo_registro {
+  +id : INT <<PK>>
+  --
+}
+
+' ANUNCIOS
+entity anuncio {
+  +id : INT <<PK>>
+  --
+  usuario_id : INT <<FK>>
+}
+
+entity registro_anuncio_visto {
+  +id : INT <<PK>>
+  --
+  alumno_id : INT <<FK>>
+  anuncio_id : INT <<FK>>
+  --
+  <<UNIQUE>> (alumno_id, anuncio_id)
+}
+
+
+
+' LSS
+entity liberacion_proceso {
+  +id : INT <<PK>>
+  --
+  solicitud_registro_id : INT UNIQUE <<FK>>
+}
+
+entity evaluacion_desempeño {
+  +id : INT <<PK>>
+  --
+  documento_id : INT UNIQUE <<FK>>
+  liberacion_proceso_id : INT UNIQUE <<FK>>
+}
+
+entity revision_desempeño {
+  +id : INT <<PK>>
+  --
+  evaluacion_desempeño_id : INT <<FK>>
+  usuario_id : INT <<FK>>
+  tipo_revisor (alumno / profesor / coordinador)
+  estado (aprobado / rechazado)
+  comentario (si rechazado)
+  hash_documento (si aprobado)
+  hash_rubrica (si aprobado)
+  ip_firma (si aprobado)
+  token_tsa (si aprobado)
+  fecha
+}
+
+
+entity solicitud_baja {
+  +id : INT <<PK>>
+  --
+  alumno_id <<FK>>       
+  solicitante_id <<FK>>
+  coordinador_id <<FK>>
+  estado 
+  comentario
+  fecha
+}
+
+entity inicio_sesion {
+  +id : INT <<PK>>
+  --
+  usuario_id : INT <<FK>>
+  fecha_hora : DATETIME
+  ip_acceso : string
+  resultado ENUM{exitoso, fallido}
+} 
+
+
+' =====================
+' RELACIONES
+' =====================
+
+'SOLICITUD DE BAJA
+alumno ||--|| solicitud_baja : "1:1 \n corresponde"
+usuario ||--o{ solicitud_baja : "1:N \n solicita"
+coordinador ||--o{ solicitud_baja : "1:N \n gestiona"
+
+
+' USUARIO 
+usuario ||--o{ token_contraseña : "1:N \n genera"
+usuario ||--o{ inicio_sesion : "1:N \n genera"
+
+
+usuario ||--|| alumno: "1:1 \n es un"
+
+usuario ||--|| profesor: "1:1 \n es un"
+usuario ||--|| coordinador : "1:1 \n es un"
+
+
+usuario ||--o{ anuncio : "1:N \n publica"
+usuario ||--o{ documento : "1:N \n crea"
+usuario ||--o{ revision_reporte_mensual : "1:N \n registra"
+usuario ||--o{ revision_reporte_global : "1:N \n registra"
+
+
+
+' REPORTE
+reporte_mensual ||--o{ revision_reporte_mensual : "1:N \n tiene"
+
+reporte_mensual ||--|| documento : "1:1 \n es un"
+
+reporte_global ||--o{ revision_reporte_global : "1:N \n resume"
+reporte_global ||--|| documento : "1:1 \n es un"
+
+
+
+
+'ALUMNO
+alumno ||-o{ documento : "1:N \n corresponde"
+alumno ||--|| cumulo_horas_y_faltas : "1:1 \n tiene"
+alumno ||--o{ registro_anuncio_visto : "1:N \n genera"
+alumno ||--|| solicitud_registro : "1:1 \n corresponde"
+
+
+'ANUNCIO
+anuncio ||--o{ registro_anuncio_visto : "1:N \n tiene"
+
+' PROFESOR
+profesor ||--o{ oferta_servicio: "1:N \n corresponde"
+profesor ||--o{ solicitud_caracteristica : "1:N \n tiene"  
+profesor ||--o{ bitacora : "1:N \n revisa"
+profesor ||--o{ actividad : "1:N \n asigna"
+
+'CARACTERISTICA
+caracteristica ||--o{ solicitud_caracteristica : "1:N \n corresponde"
+
+'OFERTA
+oferta_servicio ||--o{ deseo_de_carrera : "1:N \n registra"
+oferta_servicio ||--o{ solicitud_registro: "1:N \n tiene"
+
+
+'COORDINADOR
+coordinador ||--o{ oferta_servicio: "1:N \n revisa"
+coordinador ||--o{ recurso: "1:N \n gestiona "
+coordinador ||--o{ evento_calendario: "1:N \n gestiona"
+
+
+'CARRERA
+carrera ||--o{ deseo_de_carrera : "1:N \n se requiere"
+carrera ||--o{ solicitud_registro: "1:N \n se requiere"
+
+' SOLICITUD
+solicitud_registro }o--|| periodo_registro : "N:1 \n escoge"
+solicitud_registro ||--o{ bitacora : "1:N \n le corresponde"
+solicitud_registro ||--o{ actividad : "1:N \n le corresponde"
+solicitud_registro ||--|| liberacion_proceso : "1:1 \n solicita"
+solicitud_registro ||--o{ reporte_mensual: "1:N \n le corresponde"
+solicitud_registro ||--|| reporte_global: "1:1 \n le corresponde"
+
+
+' BITACORA
+bitacora ||--o{ registro_bitacora_actividades : "1:N \n contiene"
+actividad ||--o{ registro_bitacora_actividades : "1:N \n es registrada en"
+
+
+'EVALUACIÓN_DESEMPEÑO
+evaluacion_desempeño ||--|| documento : "1:1 \n es un"
+evaluacion_desempeño ||--o{ revision_desempeño : "1:N \n tiene"
+usuario ||--o{ revision_desempeño : "1:N \n registra"
+
+'LIBERACIÓN_PROCESO
+liberacion_proceso ||--|| evaluacion_desempeño : "1:1 \n corresponde"
+
+
+
+
+@enduml
