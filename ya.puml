@@ -47,14 +47,13 @@ entity profesor{
   --
   usuario_id : INT UNIQUE <<FK>>
   'CRED-03
-  departamento : VARCHAR(100)
+  academia : VARCHAR(100)
 }
 
 entity coordinador {
   +id : INT <<PK>>
   --
   usuario_id : INT UNIQUE <<FK>>
-  
 }
 
 entity inicio_sesion {
@@ -83,6 +82,8 @@ entity oferta_servicio{
   'GR-02
   cupos_ofertados: TINY INT UNSIGNED
   cupos_disponibles: TINY INT UNSIGNED
+  'GR-04
+  nombre_SISS: VARCHAR(100)
 }
 
 entity solicitud_registro {
@@ -101,6 +102,9 @@ entity solicitud_registro {
   'GR-02
   tipo_rechazo: VARCHAR(50) NULL
   motivo_rechazo : VARCHAR(50) NULL
+  'GR-03
+  registro_siss : TINYINT (1)
+
 }
 
 
