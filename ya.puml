@@ -8,12 +8,13 @@ skinparam linetype ortho
 entity usuario {
   +id : INT <<PK>>
   --
-  correo_institucional : VARCHAR(35) <<UQ>>
-  contraseña : VARCHAR(255)
   rol : VARCHAR(20)
+  'GR 01
+  correo_institucional : VARCHAR(35) <<UQ>>
   nombre : VARCHAR(50)
-  apellido_paterno : VARCHAR(50)
-  apellido_materno : VARCHAR(50)
+  apellidos : VARCHAR(50)
+  contraseña : VARCHAR(255)
+
   'CRED 01
   intentos_fallidos : TINY INT UNSIGNED
   cuenta_bloqueada : TINY INT(1) 
@@ -30,9 +31,15 @@ entity usuario {
 }
 
 entity alumno {
-  +id : INT <<PK>>
+  +  boleta: char(10) UNIQUE <<PK>>
   --
   usuario_id : INT UNIQUE <<FK>>
+  celular : VARCHAR(10)
+  carrera : VARCHAR(3)
+  creditos : TINY INT UNSIGNED
+  semestre : TINY INT UNSIGNED 
+  
+
 }
 
 entity profesor{
@@ -79,9 +86,14 @@ entity solicitud_registro {
   +id : INT <<PK>>
   --
   alumno_id : INT UNIQUE <<FK>>
-  oferta_id : INT <<FK>>
-  periodo_registro_id : INT <<FK>>
   carrera_id : INT <<FK>>
+  'GR-01
+  dictamen : TINY INT UNSIGNED NULL
+  periodo_registro_id : INT <<FK>>
+  oferta_id : INT <<FK>>
+  motivacion_oferta : TEXT
+  estado_solicitud : VARCHAR(100)
+  fecha_aplicacion : DATETIME
 }
 
 
