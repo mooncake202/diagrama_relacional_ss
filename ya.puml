@@ -23,7 +23,7 @@ entity usuario {
   fecha_creacion : DATETIME
   creado_por_id: INT UNSIGNED NULL <<FK>>
 
-
+'estos son para cuando suban la imagen de su firma!!!!
   rubrica_imagen
   rubrica_hash
   rubrica_ip
@@ -46,7 +46,7 @@ entity profesor{
   +id : INT <<PK>>
   --
   usuario_id : INT UNIQUE <<FK>>
-  'CRED-03
+  'CRED-04
   academia : VARCHAR(100)
 }
 
@@ -102,7 +102,7 @@ entity solicitud_registro {
   'GR-02
   tipo_rechazo: VARCHAR(50) NULL
   motivo_rechazo : VARCHAR(50) NULL
-  'GR-03
+  'GR-04
   registro_siss : TINYINT (1)
 
 }
@@ -178,6 +178,9 @@ entity documento {
   --
   alumno_id : INT <<FK>>
   creador_id : INT <<FK>>
+  'GR-05
+  tipo_documento : VARCHAR(50)
+  fecha_creacion : DATETIME
 }
 
 entity cumulo_horas_y_faltas {
