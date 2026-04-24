@@ -1,0 +1,20 @@
+MODIFICACIONES A LA BD
+
+KARENNN --------------------------------------
+******
+USUARIO — registra → INICIO_SESION
+pp	     1:N		pt
+fuerte				débil
+
+U . IN_SE
+1 - N
+1 - 1	->>>	1-N
+
+*******
+USUARIO - genera → TOKEN_CONTRASEÑA
+pp	     1:N		pt
+fuerte				débil
+
+U . T_C
+1 - N
+1 - 1 	->>>  1-N

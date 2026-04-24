@@ -1,4 +1,4 @@
-@startuml ENTIDAD111
+@startuml DIAGRAMA RELACIONAL SS
 skinparam linetype ortho
 
 ' =====================
@@ -8,20 +8,19 @@ skinparam linetype ortho
 entity usuario {
   +id : INT <<PK>>
   --
-  correoInst : VARCHAR(35) <<UQ>>
-  password : VARCHAR(255)
+  correo_institucional : VARCHAR(35) <<UQ>>
+  contraseña : VARCHAR(255)
   rol : VARCHAR(20)
   nombre : VARCHAR(50)
   apellido_paterno : VARCHAR(50)
   apellido_materno : VARCHAR(50)
-
+  'CRED 01
   intentos_fallidos : TINY INT UNSIGNED
-  cuenta_bloqueada : TINY INT(1) UNSIGNED
-  fecha_bloqueo : DATETIME
-
-
-
+  cuenta_bloqueada : TINY INT(1) 
+  fecha_bloqueo : DATETIME NULL
+  'cred 03
   fecha_creacion : DATETIME
+  creado_por_id: INT UNSIGNED NULL <<FK>>
 
 
   rubrica_imagen
@@ -40,8 +39,8 @@ entity profesor{
   +id : INT <<PK>>
   --
   usuario_id : INT UNIQUE <<FK>>
-  
-  id_creado_Por; 
+  'CRED-03
+  departamento : VARCHAR(100)
 }
 
 entity coordinador {
@@ -49,13 +48,21 @@ entity coordinador {
   --
   usuario_id : INT UNIQUE <<FK>>
   
-  id_creado_Por; 
 }
+
+entity inicio_sesion {
+  +id : INT <<PK>>
+  --
+  usuario_id : INT UNSIGNED <<FK>>
+  fecha_hora : DATETIME
+  ip_acceso : VARCHAR(45)
+  resultado : TINY INT(1)
+} 
 
 entity token_contraseña{
   +id : INT <<PK>>
   --
-  id_usuario : INT UNSIGNED <<FK>>
+  usuario_id : INT UNSIGNED <<FK>>
   token : VARCHAR(255)
   fecha_expiracion : DATETIME
   usado: TINY INT(1)
@@ -112,8 +119,6 @@ entity reporte_global{
   solicitud_registro_id : INT <<FK>>
   documento_id : INT UNIQUE <<FK>>
 }
-
-
 
 entity revision_reporte_mensual {
   +id : INT <<PK>>
@@ -230,8 +235,6 @@ entity registro_anuncio_visto {
   <<UNIQUE>> (alumno_id, anuncio_id)
 }
 
-
-
 ' LSS
 entity liberacion_proceso {
   +id : INT <<PK>>
@@ -273,14 +276,7 @@ entity solicitud_baja {
   fecha
 }
 
-entity inicio_sesion {
-  +id : INT <<PK>>
-  --
-  usuario_id : INT <<FK>>
-  fecha_hora : DATETIME
-  ip_acceso : string
-  resultado ENUM{exitoso, fallido}
-} 
+
 
 
 ' =====================
@@ -295,7 +291,7 @@ coordinador ||--o{ solicitud_baja : "1:N \n gestiona"
 
 ' USUARIO 
 usuario ||--o{ token_contraseña : "1:N \n genera"
-usuario ||--o{ inicio_sesion : "1:N \n genera"
+usuario ||--o{ inicio_sesion : "1:N \n registra"
 
 
 usuario ||--|| alumno: "1:1 \n es un"
@@ -350,6 +346,8 @@ oferta_servicio ||--o{ solicitud_registro: "1:N \n tiene"
 coordinador ||--o{ oferta_servicio: "1:N \n revisa"
 coordinador ||--o{ recurso: "1:N \n gestiona "
 coordinador ||--o{ evento_calendario: "1:N \n gestiona"
+
+coordinador ||--o{ usuario : "1:N \n crea"
 
 
 'CARRERA
