@@ -80,6 +80,9 @@ entity oferta_servicio{
   --
   profesor_id : INT <<FK>>
   coordinador_id : INT <<FK>>
+  'GR-02
+  cupos_ofertados: TINY INT UNSIGNED
+  cupos_disponibles: TINY INT UNSIGNED
 }
 
 entity solicitud_registro {
@@ -92,8 +95,12 @@ entity solicitud_registro {
   periodo_registro_id : INT <<FK>>
   oferta_id : INT <<FK>>
   motivacion_oferta : TEXT
-  estado_solicitud : VARCHAR(100)
+  estado_solicitud : VARCHAR(50)
+  estado_anterior : VARCHAR(50)
   fecha_aplicacion : DATETIME
+  'GR-02
+  tipo_rechazo: VARCHAR(50) NULL
+  motivo_rechazo : VARCHAR(50) NULL
 }
 
 
