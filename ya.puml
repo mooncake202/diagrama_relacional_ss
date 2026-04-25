@@ -82,6 +82,8 @@ entity oferta_servicio{
   cupos_disponibles: TINY INT UNSIGNED
   'GR-04
   nombre_SISS: VARCHAR(100)
+  'LSS-01
+  estado_oferta: VARCHAR(20)
 }
 
 entity solicitud_registro {
@@ -312,6 +314,18 @@ entity liberacion_proceso {
   +id : INT <<PK>>
   --
   solicitud_registro_id : INT UNIQUE <<FK>>
+  'LSS-01
+  estado : VARCHAR(50)
+  fecha_inicio : DATETIME
+  reportes_validados_siss : TINYINT(1)
+  'LSS-02
+  evaluacion_subida_siss : TINYINT(1) NULL
+  evaluacion_descargada : TINYINT(1) NULL 
+  'LSS-05
+  carta_termino_recogida : TINYINT(1) NULL 
+  'LSS-07
+  expediente_enviado : TINYINT(1) NULL
+  observaciones_rechazo : TEXT NULL
 }
 
 entity evaluacion_desempeño {
@@ -319,22 +333,36 @@ entity evaluacion_desempeño {
   --
   documento_id : INT UNIQUE <<FK>>
   liberacion_proceso_id : INT UNIQUE <<FK>>
+  'LSS-03
+  estado : VARCHAR(50)
+  observaciones_profesor : TEXT NULL
+  reportes_siss_confirmados : TINYINT(1)
+  fecha_evaluacion : DATETIME NULL
+  motivo_rechazo_coordinacion : TEXT NULL
 }
+'evaluacion_solicitada
+'rechazada_por_siss
+'pendiente_dictamen
+'devuelta_para_correccion
+'firmada_coordinacion
 
 entity revision_desempeño {
   +id : INT <<PK>>
   --
   evaluacion_desempeño_id : INT <<FK>>
   usuario_id : INT <<FK>>
-  tipo_revisor (alumno / profesor / coordinador)
-  estado (aprobado / rechazado)
-  comentario (si rechazado)
-  hash_documento (si aprobado)
-  hash_rubrica (si aprobado)
-  ip_firma (si aprobado)
-  token_tsa (si aprobado)
-  fecha
+  'LSS-02
+  tipo_revisor : VARCHAR(20)
+  estado : VARCHAR(20)
+  comentario : TEXT NULL
+  hash_documento : VARCHAR(255) NULL
+  hash_rubrica : VARCHAR(255) NULL
+  ip_firma : VARCHAR(45) NULL
+  token_tsa : VARCHAR(255) NULL
+  fecha : DATETIME
 }
+'tipo revisor puede ser: alumno, profesor, coordinador
+'estado puede ser: aprobado, rechazado
 
 
 entity solicitud_baja {
@@ -348,6 +376,18 @@ entity solicitud_baja {
   fecha
 }
 
+entity carta_termino {
+  +id : INT <<PK>>
+  --
+  liberacion_proceso_id : INT UNIQUE <<FK>>
+  'LSS-05
+  estado : VARCHAR(50)
+  carta_recogida : TINYINT(1)
+  fecha_disponible : DATETIME NULL
+  fecha_recogida : DATETIME NULL
+  'LSS-06
+  fecha_solicitud : DATETIME
+}
 
 
 
@@ -447,7 +487,7 @@ usuario ||--o{ revision_desempeño : "1:N \n registra"
 
 'LIBERACIÓN_PROCESO
 liberacion_proceso ||--|| evaluacion_desempeño : "1:1 \n corresponde"
-
+liberacion_proceso ||--|| carta_termino : "1:1 \n tiene"
 
 
 

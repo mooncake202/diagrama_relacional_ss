@@ -1,0 +1,39 @@
+1. evaluacion_solicitada
+   → Cuando: el alumno solicita su evaluación (CU-LSS-01)
+
+2. pendiente_dictamen
+   → Cuando: el profesor completa y firma la evaluación (CU-LSS-03)
+
+3. evaluacion_devuelta
+   → Cuando: coordinación rechaza la evaluación (CU-LSS-04)
+   → Regresa a: evaluacion_solicitada cuando el profesor 
+     corrige y reenvía (CU-LSS-03 flujo 1.3)
+
+4. evaluacion_aprobada
+   → Cuando: coordinación aprueba la evaluación (CU-LSS-04)
+
+5. solicitud_carta_termino
+   → Cuando: el alumno confirma subida de evaluación 
+     al SISS y solicita carta (CU-LSS-02 Alterno D)
+
+6. carta_recogida
+   → Cuando: el alumno confirma haber recogido 
+     la carta de término (CU-LSS-05)
+
+7. expediente_en_revision
+   → Cuando: el alumno envía su expediente (CU-LSS-07)
+
+8. expediente_rechazado
+   → Cuando: coordinación rechaza el expediente (CU-LSS-09)
+   → Regresa a: expediente_en_revision cuando el alumno 
+     corrige y reenvía (CU-LSS-07 flujo alterno 1.1)
+
+9. expediente_aprobado
+   → Cuando: coordinación aprueba el expediente (CU-LSS-09)
+
+10. solicitud_constancia_termino
+    → Cuando: el alumno solicita su constancia 
+      de término (CU-LSS-08 Flujo alterno B)
+
+11. constancia_disponible
+    → Cuando: coordinación emite la constancia (CU-LSS-11)
