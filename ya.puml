@@ -14,7 +14,6 @@ entity usuario {
   nombre : VARCHAR(50)
   apellidos : VARCHAR(50)
   contraseña : VARCHAR(255)
-
   'CRED 01
   intentos_fallidos : TINY INT UNSIGNED
   cuenta_bloqueada : TINY INT(1) 
@@ -22,8 +21,7 @@ entity usuario {
   'cred 03
   fecha_creacion : DATETIME
   creado_por_id: INT UNSIGNED NULL <<FK>>
-
-'estos son para cuando suban la imagen de su firma!!!!
+  'estos son para cuando suban la imagen de su firma en tu cu!!!!
   rubrica_imagen
   rubrica_hash
   rubrica_ip
@@ -117,19 +115,46 @@ entity actividad {
   +id : INT <<PK>>
   --
   solicitud_registro_id : INT <<FK>>
+  'AH-01
+  titulo : VARCHAR(150)
+  descripcion : TEXT
+  entregable_esperado : TEXT
+  fecha_limite : DATE
+  estado : VARCHAR(20)
+  fecha_asignacion : DATETIME
+  'AH-02
+  porcentaje_progreso : TINYINT UNSIGNED
+  fecha_completada : DATETIME NULL
 }
+'estado: sin_comenzar, en_progreso, vencida, completada_en_tiempo, completada_fuera_de_tiempo
 
 entity bitacora {
   +id : INT <<PK>>
   --
   solicitud_registro_id : INT <<FK>>
+  'AH-03
+  hora_inicio : DATETIME
+  hora_fin : DATETIME
+  horas_contabilizadas : TINYINT UNSIGNED
+  estado : VARCHAR(30)
+  fecha_registro : DATE
+  'AH-04
+  motivo_rechazo : TEXT NULL
+  fecha_revision : DATETIME NULL
+  revisado_por_id : INT <<FK>> NULL
 }
+'ESTADO: En curso, Pendiente de revisión, Aprobada, Rechazada
+
 
 entity registro_bitacora_actividades {
   +id : INT <<PK>>
   --
   bitacora_id : INT <<FK>>
   actividad_id : INT <<FK>>
+  'AH-03
+  descripcion : TEXT
+  porcentaje_avance_registrado : TINYINT UNSIGNED
+  evidencia : TEXT
   --
   <<UNIQUE>> (bitacora_id, actividad_id)
 }
@@ -200,6 +225,12 @@ entity cumulo_horas_y_faltas {
   +id : INT <<PK>>
   --
   alumno_id : INT UNIQUE <<FK>>
+  'AH-03
+  horas_acumuladas : SMALLINT UNSIGNED
+  horas_rechazadas : SMALLINT UNSIGNED
+  'AH-04
+  faltas_acumuladas : TINYINT UNSIGNED
+  faltas_consecutivas : TINYINT UNSIGNED
 }
 
 ' carrera DESEADO
@@ -387,7 +418,7 @@ coordinador ||--o{ recurso: "1:N \n gestiona "
 coordinador ||--o{ evento_calendario: "1:N \n gestiona"
 
 coordinador ||--o{ usuario : "1:N \n crea"
-
+coordinador ||--o{ documento : "1:N \n revisa"
 
 'CARRERA
 carrera ||--o{ deseo_de_carrera : "1:N \n se requiere"

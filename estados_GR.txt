@@ -1,5 +1,6 @@
 ESTADOS QUE FLUYEN EN EL MÓDULO GR
 
+ESTADO SOLICITUD...
 espera_respuesta_de_profesor
 aceptada_por_profesor
 rechazada_por_profesor

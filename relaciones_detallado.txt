@@ -19,4 +19,12 @@ U . T_C
 1 - N
 1 - 1 	->>>  1-N
 
-**** coordinacion aprueba docs
+**** coordinacion aprueba docs LISTO
+
+COORDINADOR - revisa → docs
+pp          1:N         pt
+fuerte                  fuerte
+
+U . D
+1 - N
+1 - 1   ->>>  1-N
