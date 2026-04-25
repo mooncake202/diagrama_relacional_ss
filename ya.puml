@@ -125,6 +125,8 @@ entity actividad {
   'AH-02
   porcentaje_progreso : TINYINT UNSIGNED
   fecha_completada : DATETIME NULL
+  'AH-06
+  fecha_limite_original : DATE NULL
 }
 'estado: sin_comenzar, en_progreso, vencida, completada_en_tiempo, completada_fuera_de_tiempo
 
