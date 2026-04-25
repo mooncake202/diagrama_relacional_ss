@@ -105,10 +105,11 @@ entity solicitud_registro {
   'GR-04
   registro_siss : TINYINT (1)
   'GR-05
-  docs_inicales : TINYINT (1)
+  docs_iniciales : TINYINT (1)
   'GR-08
   carta_compromiso : TINYINT (1)
-
+  'GR-11
+  expediente: TINYINT (1)
 }
 
 
@@ -189,6 +190,8 @@ entity documento {
   ruta_archivo : VARCHAR(255) 
   'GR-07
   aprobado_por_id : INT <<FK>> NULL
+  'GR-10
+  nombre_expediente: VARCHAR(100) NULL
 }
 
 'estado_documento puede ser: "en revision", "aprobado", "rechazado", "con_correciones"

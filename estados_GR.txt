@@ -23,3 +23,6 @@ espera_confirmacion_carta_compromiso
 carta_comprmiso_confirmada
 
 adjuntar_expediente
+espera_revisión_expediente
+expediente_con_correcciones
+expediente_aprobado
