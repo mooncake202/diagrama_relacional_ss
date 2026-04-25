@@ -19,3 +19,7 @@ rechazada_definitivamente
 modificar_reenviar
 
 descargar_carta_compromiso
+espera_confirmacion_carta_compromiso
+carta_comprmiso_confirmada
+
+adjuntar_expediente
