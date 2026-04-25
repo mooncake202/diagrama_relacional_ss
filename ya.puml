@@ -104,6 +104,8 @@ entity solicitud_registro {
   motivo_rechazo : VARCHAR(50) NULL
   'GR-04
   registro_siss : TINYINT (1)
+  'GR-05
+  docs_inicales : TINYINT (1)
 
 }
 
@@ -181,6 +183,7 @@ entity documento {
   'GR-05
   tipo_documento : VARCHAR(50)
   fecha_creacion : DATETIME
+  estado_documento : VARCHAR (10)
 }
 
 entity cumulo_horas_y_faltas {

@@ -1,0 +1,19 @@
+ESTADOS QUE FLUYEN EN EL MÓDULO GR
+
+espera_respuesta_de_profesor
+aceptada_por_profesor
+rechazada_por_profesor
+rechazada_por_cupos
+
+
+registro_SISS
+adjuntar_documentacion_inicial
+SISS_y_documentacion_pendiente
+
+
+SISS_docs_aprobados
+corregir_docsini
+corregir_SISS
+rechazada_definitivamente
+
+descargar_carta_compromiso
