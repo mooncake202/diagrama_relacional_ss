@@ -101,7 +101,7 @@ entity solicitud_registro {
   fecha_aplicacion : DATETIME
   'GR-02
   tipo_rechazo: VARCHAR(50) NULL
-  motivo_rechazo : VARCHAR(50) NULL
+  motivo_rechazo : TEXT NULL
   'GR-04
   registro_siss : TINYINT (1)
   'GR-05
@@ -183,8 +183,11 @@ entity documento {
   'GR-05
   tipo_documento : VARCHAR(50)
   fecha_creacion : DATETIME
-  estado_documento : VARCHAR (10)
+  estado_documento : VARCHAR (20)
+  ruta_archivo : VARCHAR(255) 
 }
+
+'estado_documento puede ser: "en revision", "aprobado", "rechazado", "con_correciones"
 
 entity cumulo_horas_y_faltas {
   +id : INT <<PK>>

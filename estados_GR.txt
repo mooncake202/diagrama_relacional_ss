@@ -16,4 +16,6 @@ corregir_docsini
 corregir_SISS
 rechazada_definitivamente
 
+modificar_reenviar
+
 descargar_carta_compromiso
