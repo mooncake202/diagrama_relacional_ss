@@ -21,11 +21,12 @@ entity usuario {
   'cred 03
   fecha_creacion : DATETIME
   creado_por_id: INT UNSIGNED NULL <<FK>>
-  'estos son para cuando suban la imagen de su firma en tu cu!!!!
-  rubrica_imagen
-  rubrica_hash
-  rubrica_ip
-  rubrica_fecha_registro
+  'REP-01, REP-05 
+  'ejemplo de ruta para rubrica_imagen: /storage/rubricas/usuario_123.png
+  rubrica_imagen: : VARCHAR(500)
+  rubrica_hash: VARCHAR(64)
+  rubrica_ip: VARCHAR(45) 
+  rubrica_fecha_registro: DATETIME
 }
 
 entity alumno {
@@ -187,14 +188,14 @@ entity revision_reporte_mensual {
   --
   reporte_mensual_id : INT <<FK>>
   usuario_id : INT <<FK>>
-  tipo_revisor (alumno / profesor / coordinador)
-  estado (aprobado / rechazado)
-  comentario (si rechazado)
-  hash_documento (si aprobado)
-  hash_rubrica (si aprobado)
-  ip_firma (si aprobado)
-  token_tsa (si aprobado)
-  fecha
+  tipo_revisor: ENUM ('alumno', 'profesor, 'coordinador')
+  estado: ENUM('aprobado','rechazado')
+  comentario: TEXT NULL 
+  hash_documento: VARCHAR(64) NULL
+  hash_rubrica: VARCHAR(64) NULL
+  ip_firma: VARCHAR(45) NULL
+  token_tsa: VARCHAR(255) NULL
+  fecha: DATETIME
 }
 
 entity revision_reporte_global {
@@ -202,14 +203,14 @@ entity revision_reporte_global {
   --
   reporte_global_id : INT <<FK>>
   usuario_id : INT <<FK>>
-  tipo_revisor (alumno / profesor / coordinador)
-  estado (aprobado / rechazado)
-  comentario (si rechazado)
-  hash_documento (si aprobado)
-  hash_rubrica (si aprobado)
-  ip_firma (si aprobado)
-  token_tsa (si aprobado)
-  fecha
+  tipo_revisor: ENUM('alumno','profesor','coordinador')
+  estado: ENUM('aprobado','rechazado')
+  comentario: TEXT NULL
+  hash_documento: VARCHAR(64) NULL
+  hash_rubrica: VARCHAR(64) NULL
+  ip_firma: VARCHAR(45) NULL
+  token_tsa: VARCHAR(255) NULL
+  fecha: DATETIME
 }
 
 entity documento {
