@@ -179,7 +179,7 @@ entity reporte_global{
   solicitud_registro_id : INT <<FK>>
   documento_id : INT UNIQUE <<FK>>
   'REP-07
-  actividades_global: TEXT
+  actividades_resumen: TEXT
 }
 
 entity revision_reporte_mensual {
