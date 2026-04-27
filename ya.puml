@@ -168,13 +168,18 @@ entity reporte_mensual{
   --
   solicitud_registro_id : INT <<FK>>
   documento_id : INT UNIQUE <<FK>>
+  'REP-01
+  actividades_mes: TEXT
 }
+'ESTADO: Pendiente de revisón profesor
 
 entity reporte_global{
   +id : INT <<PK>>
   --
   solicitud_registro_id : INT <<FK>>
   documento_id : INT UNIQUE <<FK>>
+  'REP-07
+  actividades_global: TEXT
 }
 
 entity revision_reporte_mensual {
@@ -212,6 +217,7 @@ entity documento {
   --
   alumno_id : INT <<FK>>
   creador_id : INT <<FK>>
+
   'GR-05
   tipo_documento : VARCHAR(50)
   fecha_creacion : DATETIME
