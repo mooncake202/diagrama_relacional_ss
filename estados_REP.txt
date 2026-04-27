@@ -1,4 +1,8 @@
-Estados de reporte
+Estados de reporte MENSUAL y GLOBAL
 
-en REP-01
-Pendiente de revisión profesor
+
+pendiente_revision_profesor     >  alumno genera y firma (CU-REP-01 / CU-REP-07)
+pendiente_revision_coordinacion >  profesor aprueba y firma (CU-REP-05)
+rechazado_profesor              >  profesor rechaza (CU-REP-05)
+rechazado_coordinacion          >  coordinación rechaza (CU-REP-06)
+aprobado_coordinacion  
