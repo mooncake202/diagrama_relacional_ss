@@ -88,11 +88,13 @@ entity oferta_servicio{
   'PRO-01
   nombre_proyecto : VARCHAR(150)
   tipo_oferta : ENUM('individual','proyecto')
-  descripcion: TEXT
-  cupos_solicitados: TINY INT UNSIGNED
+  descripcion_actividades: TEXT
+  cupos_solicitados: TINY INT UNSIGNED NULL
   'PRO-02
   cupos_autorizados: TINY INT UNSIGNED
+  motivo_rechazo : TEXT NULL
 }
+'estados: pendiente_revision, aprobada, rechazada, pendiente_correccion, inactiva
 
 entity solicitud_registro {
   +id : INT <<PK>>
