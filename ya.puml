@@ -284,6 +284,8 @@ entity deseo_de_carrera {
 entity caracteristica {
   +id : INT <<PK>>
   --
+'ADM-17
+  nombre : ENUM('Presidente de academia','Coordinador','Jefe de departamento','Investigador')
 }
 
 entity solicitud_caracteristica {
@@ -291,7 +293,12 @@ entity solicitud_caracteristica {
   --
   profesor_id : INT <<FK>>
   caracteristica_id : INT <<FK>>
+'ADM-17
+  justificacion : TEXT
+  estado : VARCHAR(30)
+  fecha : DATETIME
 }
+'estados: pendiente, aprobada, rechazada
 
 ' CALENDARIO
 
