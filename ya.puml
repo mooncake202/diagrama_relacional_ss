@@ -94,7 +94,7 @@ entity oferta_servicio{
   cupos_autorizados: TINY INT UNSIGNED
   motivo_rechazo : TEXT NULL
 }
-'estados: pendiente_revision, aprobada, rechazada, pendiente_correccion, inactiva
+'estados: pendiente_revision, aprobada, rechazada, pendiente_correccion, inactiva, concluida
 
 entity solicitud_registro {
   +id : INT <<PK>>
