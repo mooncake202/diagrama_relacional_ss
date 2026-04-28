@@ -318,6 +318,15 @@ entity recurso {
   fecha_actualizacion : DATETIME NULL
 }
 
+entity contacto_institucional{
+  +id : INT <<PK>>
+  --
+  coordinador_id : INT <<FK>>
+  'ADM-07
+  tipo : ENUM('correo','telefono','ubicacion','horario')
+  valor : VARCHAR(255)
+  fecha_actualizacion : DATETIME
+}
 
 entity periodo_registro {
   +id : INT <<PK>>
@@ -517,6 +526,8 @@ coordinador |o--o{ solicitud_baja_proyecto : "1:N \n gestiona"
 
 coordinador ||--o{ usuario : "1:N \n crea"
 coordinador ||--o{ documento : "1:N \n revisa"
+
+coordinador ||--o{ contacto_institucional : "1:N \n gestiona"
 
 'CARRERA
 carrera ||--o{ deseo_de_carrera : "1:N \n se requiere"

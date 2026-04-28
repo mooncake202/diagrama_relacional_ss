@@ -56,3 +56,11 @@ oferta_servicio — registra → solicitud_baja_proyecto
                 1:N
 pp                           pp (null hasta que coordinador actue)
    FK: coordinador_id NULL
+
+------NUEVA contacto_institucional >>fuerte
+PK: id : INT
+
+coordinador — gestiona → contacto_institucional
+                1:N
+pp                         ptotal
+   FK: coordinador_id
