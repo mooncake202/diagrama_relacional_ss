@@ -37,7 +37,8 @@ entity alumno {
   carrera : VARCHAR(3)
   creditos : TINY INT UNSIGNED
   semestre : TINY INT UNSIGNED 
-  
+  'ADM-03, ADM-04
+  correo_personal : VARCHAR(50) NULL
 
 }
 
@@ -323,6 +324,12 @@ entity anuncio {
   +id : INT <<PK>>
   --
   usuario_id : INT <<FK>>
+  'ADM-08, ADM-11
+  titulo : VARCHAR(150)
+  contenido : TEXT
+  fecha_publicacion : DATETIME
+  origen : ENUM('coordinacion','profesor')
+}
 }
 
 entity registro_anuncio_visto {
@@ -331,6 +338,8 @@ entity registro_anuncio_visto {
   alumno_id : INT <<FK>>
   anuncio_id : INT <<FK>>
   --
+  'ADM-02
+  leido : TINYINT(1)
   <<UNIQUE>> (alumno_id, anuncio_id)
 }
 
@@ -463,7 +472,7 @@ alumno ||--|| solicitud_registro : "1:1 \n corresponde"
 
 
 'ANUNCIO
-anuncio ||--o{ registro_anuncio_visto : "N:N \n tiene"
+anuncio ||--o{ registro_anuncio_visto : "1:N \n tiene"
 
 ' PROFESOR
 profesor ||--o{ oferta_servicio: "1:N \n corresponde"
