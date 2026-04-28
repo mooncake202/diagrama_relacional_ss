@@ -463,7 +463,7 @@ alumno ||--|| solicitud_registro : "1:1 \n corresponde"
 
 
 'ANUNCIO
-anuncio ||--o{ registro_anuncio_visto : "1:N \n tiene"
+anuncio ||--o{ registro_anuncio_visto : "N:N \n tiene"
 
 ' PROFESOR
 profesor ||--o{ oferta_servicio: "1:N \n corresponde"
