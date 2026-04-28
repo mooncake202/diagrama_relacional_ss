@@ -23,7 +23,7 @@ entity usuario {
   creado_por_id: INT UNSIGNED NULL <<FK>>
   'REP-01, REP-05 
   'ejemplo de ruta para rubrica_imagen: /storage/rubricas/usuario_123.png
-  rubrica_imagen: : VARCHAR(500)
+  rubrica_imagen : VARCHAR(500)
   rubrica_hash: VARCHAR(64)
   rubrica_ip: VARCHAR(45) 
   rubrica_fecha_registro: DATETIME
@@ -81,10 +81,17 @@ entity oferta_servicio{
   'GR-02
   cupos_ofertados: TINY INT UNSIGNED
   cupos_disponibles: TINY INT UNSIGNED
-  'GR-04
+  'GR-04 y *PRO-01
   nombre_SISS: VARCHAR(100)
-  'LSS-01
+  'LSS-01  
   estado_oferta: VARCHAR(20)
+  'PRO-01
+  nombre_proyecto : VARCHAR(150)
+  tipo_oferta : ENUM('individual','proyecto')
+  descripcion: TEXT
+  cupos_solicitados: TINY INT UNSIGNED
+  'PRO-02
+  cupos_autorizados: TINY INT UNSIGNED
 }
 
 entity solicitud_registro {
@@ -170,9 +177,10 @@ entity reporte_mensual{
   solicitud_registro_id : INT <<FK>>
   documento_id : INT UNIQUE <<FK>>
   'REP-01
+  num_reporte : TINYINT UNSIGNED
   actividades_mes: TEXT
+  estado_reporte: VARCHAR(35)
 }
-'ESTADO: Pendiente de revisón profesor
 
 entity reporte_global{
   +id : INT <<PK>>
@@ -181,6 +189,7 @@ entity reporte_global{
   documento_id : INT UNIQUE <<FK>>
   'REP-07
   actividades_resumen: TEXT
+  estado_reporte: VARCHAR(35)
 }
 
 entity revision_reporte_mensual {
@@ -188,7 +197,7 @@ entity revision_reporte_mensual {
   --
   reporte_mensual_id : INT <<FK>>
   usuario_id : INT <<FK>>
-  tipo_revisor: ENUM ('alumno', 'profesor, 'coordinador')
+  tipo_revisor: ENUM('alumno','profesor','coordinador')
   estado: ENUM('aprobado','rechazado')
   comentario: TEXT NULL 
   hash_documento: VARCHAR(64) NULL
@@ -219,8 +228,10 @@ entity documento {
   alumno_id : INT <<FK>>
   creador_id : INT <<FK>>
 
-  'GR-05
+  'GR-05, en REP-01 y 07 tipo_documento: 'reporte_mensual' y 'reporte_global' 
+  'ruta_archivo y fecha_creacion tambien para reportes
   tipo_documento : VARCHAR(50)
+
   fecha_creacion : DATETIME
   estado_documento : VARCHAR (20)
   ruta_archivo : VARCHAR(255) 
@@ -438,7 +449,7 @@ reporte_global ||--|| documento : "1:1 \n es un"
 
 
 'ALUMNO
-alumno ||-o{ documento : "1:N \n corresponde"
+alumno ||--o{ documento : "1:N \n corresponde"
 alumno ||--|| cumulo_horas_y_faltas : "1:1 \n tiene"
 alumno ||--o{ registro_anuncio_visto : "1:N \n genera"
 alumno ||--|| solicitud_registro : "1:1 \n corresponde"

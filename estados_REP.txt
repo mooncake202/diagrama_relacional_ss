@@ -1,5 +1,6 @@
 Estados de reporte MENSUAL y GLOBAL
 
+estado_reporte:
 
 pendiente_revision_profesor     >  alumno genera y firma (CU-REP-01 / CU-REP-07)
 pendiente_revision_coordinacion >  profesor aprueba y firma (CU-REP-05)
