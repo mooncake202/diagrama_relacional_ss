@@ -90,6 +90,7 @@ entity oferta_servicio{
   tipo_oferta : ENUM('individual','proyecto')
   descripcion_actividades: TEXT
   cupos_solicitados: TINY INT UNSIGNED NULL
+  
   'PRO-02
   cupos_autorizados: TINY INT UNSIGNED
   motivo_rechazo : TEXT NULL
