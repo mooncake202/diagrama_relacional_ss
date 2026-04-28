@@ -52,6 +52,8 @@ entity profesor{
   telefono_personal : VARCHAR(10) NULL
   horario_atencion : VARCHAR(100)
   cubiculo : VARCHAR(100)
+  'ADM-18
+  cupos_autorizados : TINYINT UNSIGNED
 }
 
 entity coordinador {
@@ -297,6 +299,10 @@ entity solicitud_caracteristica {
   justificacion : TEXT
   estado : VARCHAR(30)
   fecha : DATETIME
+  'ADM-18
+  cupos_adicionales : TINYINT UNSIGNED NULL
+  comentario : TEXT NULL
+  fecha_respuesta : DATETIME NULL
 }
 'estados: pendiente, aprobada, rechazada
 
