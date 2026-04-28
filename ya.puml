@@ -47,6 +47,10 @@ entity profesor{
   usuario_id : INT UNIQUE <<FK>>
   'CRED-04
   academia : VARCHAR(100)
+  'ADM-01, ADM-12
+  telefono_personal : VARCHAR(10) NULL
+  horario_atencion : VARCHAR(100)
+  cubiculo : VARCHAR(60)
 }
 
 entity coordinador {
