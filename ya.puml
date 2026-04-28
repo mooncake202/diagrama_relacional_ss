@@ -46,12 +46,12 @@ entity profesor{
   +id : INT <<PK>>
   --
   usuario_id : INT UNIQUE <<FK>>
-  'CRED-04
-  academia : VARCHAR(100)
+  'CRED-04 
+  departamento : VARCHAR(100)
   'ADM-01, ADM-12
   telefono_personal : VARCHAR(10) NULL
   horario_atencion : VARCHAR(100)
-  cubiculo : VARCHAR(60)
+  cubiculo : VARCHAR(100)
 }
 
 entity coordinador {
@@ -424,11 +424,13 @@ entity solicitud_baja {
   alumno_id <<FK>>       
   solicitante_id <<FK>>
   coordinador_id <<FK>>
-  estado : VARCHAR(10)
+  estado : VARCHAR(12)
   motivo : TEXT
   fecha : DATETIME
+  'ADM-13
+  expediente_pdf : VARCHAR(500) NULL
 }
-'estados: pendiente, aprobada, rechazada
+'estados: pendiente, en_revision, aprobada, rechazada
 
 'ADM-05 
 entity solicitud_baja_proyecto{
@@ -438,7 +440,7 @@ entity solicitud_baja_proyecto{
   oferta_id : INT <<FK>>
   coordinador_id : INT <<FK>> NULL
   'ADM-05
-  estado : VARCHAR(10)
+  estado : VARCHAR(12)
   motivo : TEXT
   fecha : DATETIME
 }
