@@ -38,3 +38,21 @@ fuerte              fuerte
 LSS . CT
 1 - 1
 1  -  1
+
+----------NUEVA
+solicitud_baja_proyecto >>fuerte (todas las entidades)
+
+alumno — solicita → solicitud_baja_proyecto
+            1:N
+ pp                  pt
+   FK: alumno_id
+
+oferta_servicio — registra → solicitud_baja_proyecto
+                     1:N
+ pp                           pt
+   FK: oferta_id
+
+3. coordinador — gestiona → solicitud_baja_proyecto
+                1:N
+pp                           pp (null hasta que coordinador actue)
+   FK: coordinador_id NULL

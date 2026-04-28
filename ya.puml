@@ -330,7 +330,6 @@ entity anuncio {
   fecha_publicacion : DATETIME
   origen : ENUM('coordinacion','profesor')
 }
-}
 
 entity registro_anuncio_visto {
   +id : INT <<PK>>
