@@ -295,17 +295,23 @@ entity solicitud_caracteristica {
 
 ' CALENDARIO
 
-entity evento_calendario {
+entity evento_calendario{
   +id : INT <<PK>>
   --
   coordinador_id : INT <<FK>>
-  nombre: VARCHAR
-  tipo: ENUM("Vacacional", "Inhabil")
-  fecha: DATE
-  hora: TIME
-  fecha_inicio: DATE
-  fecha_fin: DATE
+  'ADM-09
+  nombre : VARCHAR(150)
+  tipo : ENUM('Vacacional','Inhabil','Prestacion')
+  fecha : DATE NULL
+  hora : TIME NULL
+  fecha_inicio : DATE NULL
+  fecha_fin : DATE NULL
+  'solo para Prestacion
+  anio : CHAR(4) NULL
+  semestre : ENUM('01','02') NULL
+  fecha_max_expediente : DATE NULL
 }
+
 ' RECURSO
 entity recurso {
   +id : INT <<PK>>
