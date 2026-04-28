@@ -415,7 +415,7 @@ entity revision_desempeño {
   fecha : DATETIME
 }
 'tipo revisor puede ser: alumno, profesor, coordinador
-'estado puede ser: aprobado, rechazado
+'estado puede ser: aprobado
 
 
 entity solicitud_baja {
@@ -430,7 +430,7 @@ entity solicitud_baja {
   'ADM-13
   expediente_pdf : VARCHAR(500) NULL
 }
-'estados: pendiente, en_revision, aprobada, rechazada
+'estados: pendiente, en_revision, aprobada
 
 'ADM-05 
 entity solicitud_baja_proyecto{
