@@ -311,6 +311,11 @@ entity recurso {
   +id : INT <<PK>>
   --
   coordinador_id : INT <<FK>>
+  'ADM-06
+  nombre : VARCHAR(150)
+  url : VARCHAR(500)
+  fecha_registro : DATETIME
+  fecha_actualizacion : DATETIME NULL
 }
 
 
